@@ -20,7 +20,7 @@ Installation
 Follow these steps to install Secure Messaging App:
 
 Clone the repository:
-git clone https://github.com/your-username/secure-messaging-app.git
+git clone https://github.com/ebbsy60/ghost.git
 cd ghost
 
 Set up a virtual environment (optional but recommended):
