@@ -1,4 +1,4 @@
-﻿Ghost messenger  online version found at https://ghostmessenger.site
+#﻿Ghost messenger  online version found at https://ghostmessenger.site
  
 This secure Messaging App is a Flask-based web application that allows users to send encrypted messages securely. Without user accounts and with any username you choose. Utilizing RSA encryption, messages between senders and receivers are encrypted and decrypted, ensuring that only the intended recipient can read the message content. Messages are deleted once read.
 
@@ -28,7 +28,7 @@ python3 -m venv venv
 
 Activate the virtual enviroment with
 source venv/bin/activate  
-# On Windows use 
+On Windows use 
 venv\Scripts\activate
 
 Install the required packages:
