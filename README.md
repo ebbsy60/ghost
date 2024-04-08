@@ -13,7 +13,17 @@ Before you begin, ensure you have met the following requirements:
 
 Python 3.6+
 Pip (Python package manager)
-A PostgreSQL database
+A PostgreSQL database with a table named messages, heres how to create it
+
+CREATE TABLE messages (
+    id SERIAL PRIMARY KEY,
+    message TEXT NOT NULL,
+    sender_username VARCHAR(255) NOT NULL,
+    receiver_username VARCHAR(255) NOT NULL,
+    public_key TEXT NOT NULL,
+    private_key TEXT NOT NULL
+);
+
 
 
 Installation
