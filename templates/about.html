@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Ghost Messenger Encryption | Secure Messaging Service</title>
+    <meta name="description" content="Learn about Ghost Messenger's secure encryption process, including RSA encryption, public key encryption, OAEP padding, and Base64 encoding.">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/ghost.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+</head>
+<body>
+    <img src="{{ url_for('static', filename='images/ghost.png') }}" class="logo" alt="Ghost Messenger Logo">
+    <h1>About Ghost Messenger's Encryption</h1>
+
+    <p class="white-text"><strong>All messages are deleted from the server once read; they cannot be retrieved.</strong></p>
+    <p class="white-text"><strong>To enhance your anonymity when sending messages, consider using a VPN with a no-logs policy. ProtonVPN offers a free service that claims to have No Identifying Data.</strong></p>
+    <p class="white-text"><strong>Fuck the Australian government's surveillance laws</strong></p>
+    <p class="white-text"><strong>RSA Encryption:</strong> Our generate_keys() function initiates a pair of RSA keys—a private key and a public key. RSA's asymmetric cryptographic algorithm is essential for secure data transmission, employing separate keys for encryption (public key) and decryption (private key).</strong></p>
+    <p class="white-text"><strong>Public Key Encryption for Messages:</strong> Messages are encrypted using the recipient's public key through the encrypt_message() function, ensuring that only the holder of the corresponding private key can decrypt and access the message content.</strong></p>
+    <p class="white-text"><strong>OAEP Padding:</strong> To bolster the encryption process, we use Optimal Asymmetric Encryption Padding (OAEP) with SHA-256. This secure padding scheme is a staple in RSA encryption, designed to thwart various attacks.</strong></p>
+    <p class="white-text"><strong>Base64 Encoding:</strong> Post-encryption, messages are converted into Base64 encoding. This method allows binary data to be safely stored and transmitted over text-based media, ensuring integrity and confidentiality.</strong></p>
+
+    <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
+    <a href="/" class="white-link">Go Back</a>
+</body>
+</html>
