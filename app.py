@@ -46,7 +46,6 @@ def apply_security_headers(response):
     csp_policy = f"default-src 'self'; script-src 'self' 'nonce-{nonce}'; style-src 'self'; frame-src https://www.youtube.com; object-src 'none'; base-uri 'none'; require-trusted-types-for 'script';"
     response.headers['Content-Security-Policy'] = csp_policy
     response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
-    #response.headers['Referrer-Policy'] = 'no-referrer'
     response.headers['X-Content-Type-Options'] = 'nosniff'
     return response
 
