@@ -1,0 +1,11 @@
+Flask 
+Flask-Session 
+cryptography 
+Flask-SQLAlchemy
+psycopg2-binary
+gunicorn
+python-dotenv
+flask-csp
+Flask-WTF
+flask_limiter
+flask-cors

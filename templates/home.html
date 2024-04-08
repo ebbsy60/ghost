@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Viewport for Responsive Web Design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO Optimized Title Tag -->
+    <title>Ghost Messenger: Secure Encryption Messaging Service</title>
+    <!-- Meta Description for SEO -->
+    <meta name="description" content="Ghost Messenger offers end-to-end RSA encrypted messaging for secure communication. Stay private with our no-log, secure service. Learn more.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/ghost.png') }}">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/notification.css') }}">
+
+
+</head>
+<body>
+    <!-- Logo with Alt Text -->
+    <img src="{{ url_for('static', filename='images/ghost.png') }}" class="logo" alt="Ghost Messenger Logo">
+    <!-- Main Heading as H1 for Semantic HTML -->
+    <h1>Ghost Messenger</h1>
+  
+    <!-- Call to Action and External Link -->
+    <p><strong><a href="https://www.youtube.com/watch?v=A8zTYudtmtU" class="white-link">Watch How Ghost Messenger Works</a></strong></p>
+    <p><strong><a href="/about" class="white-link">About Us</a></strong></p>
+
+    <!-- Form for Message Sending -->
+    <form action="/" method="post">
+        {{ form.csrf_token }}
+        <div>
+            {{ form.sender.label }} {{ form.sender }}
+        </div>
+        <div>
+            {{ form.receiver.label }} {{ form.receiver }}
+        </div>
+        <div>
+            {{ form.message.label }} {{ form.message }}
+        </div>
+        <div>
+            {{ form.submit }}
+        </div>
+    </form>
+
+    <!-- Section for Decrypted Messages -->
+    <section id="decrypted-messages"> <!-- Added id here -->
+        <h2>Get Your Encrypted Messages</h2>
+        <form action="/decrypt" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div>Your Username: <input type="text" name="receiver_username" required></div>
+            <input type="submit" value="Decrypt">
+        </form>
+        {% if decrypted_messages %}
+            <h3>Decrypted Messages</h3>
+            {% for msg in decrypted_messages %}
+                <p class="message-content">
+                    <strong>From {{ msg.sender }} to {{ msg.receiver }}:</strong> {{ msg.text }}
+                </p>
+            {% endfor %}
+        {% endif %}
+    </section>
+
+
+    <script nonce="{{ g.nonce }}">
+        document.addEventListener("DOMContentLoaded", function() {
+            {% if decrypted_messages %}
+                document.getElementById('decrypted-messages').scrollIntoView();
+            {% endif %}
+        
+            // This function will show the notification dropdown
+            function showNotification(message, isError = false) {
+                var notification = document.createElement('div');
+                notification.className = 'notification-dropdown' + (isError ? ' error' : '');
+                notification.textContent = message;
+                document.body.appendChild(notification);
+        
+                // Display the notification
+                notification.style.display = 'block';
+        
+                // Hide the notification after 5 seconds
+                setTimeout(function() {
+                    notification.style.display = 'none';
+                    document.body.removeChild(notification);
+                }, 5000);
+            }
+        
+            // Look for flash messages inserted by Flask and show them as notifications
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        var isError = "{{ category }}" === "error"; // Determine if the message is an error based on its category
+                        showNotification("{{ message }}", isError);
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        });
+    </script>
+        
+    
+
+</body>
+</html>
